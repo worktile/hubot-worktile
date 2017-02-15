@@ -12,9 +12,13 @@ class WorktileBot extends Adapter
     return @robot.logger.error("No service token provided to Hubot") unless this.options.token
     @client.connect @init
 
-  init: =>
-    @client.on 'message', @message
-    @robot.logger.info 'Hubot connected worktile'
+  init: (success)=>
+    if success
+      @robot.logger.info 'Hubot connected worktile'
+      @client.on 'message', @message
+      @emit('connected')
+    else
+      @robot.logger.info 'Hubot connecting failed'
 
   message: (message) =>
     if message.user.role isnt 5
@@ -43,5 +47,5 @@ class WorktileBot extends Adapter
 
 
 exports.use = (robot) ->
-	return new WorktileBot(robot, token: process.env.HUBOT_WORKTILE_TOKEN)
+  return new WorktileBot(robot, token: process.env.HUBOT_WORKTILE_TOKEN)
 
