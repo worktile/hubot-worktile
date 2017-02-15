@@ -10,9 +10,11 @@ class WorktileBot extends Adapter
 
   run: =>
     return @robot.logger.error("No service token provided to Hubot") unless this.options.token
+    @client.connect @init
+
+  init: =>
     @client.on 'message', @message
-    #please make sure the token is correct before connected
-    @emit "connected"
+    @robot.logger.info 'Hubot connected worktile'
 
   message: (message) =>
     if message.user.role isnt 5
