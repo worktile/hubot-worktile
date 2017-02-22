@@ -5,7 +5,7 @@ class WorktileClient
   constructor: (options, robot) ->
     @token = options.token
     @robot = robot
-    @url = "http://worktile.local:8300/hubot/#{@token}"
+    @url = "https://hook.worktile.com/hubot/#{@token}"
 
   connect: (init) ->
     @robot.http(@url).post({}) (err, res, body) =>
