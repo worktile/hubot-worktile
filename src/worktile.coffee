@@ -31,19 +31,23 @@ class WorktileBot extends Adapter
       data = new TextMessage(user, text, 1)
       @robot.receive data
 
-  reply: (envelope, message) =>
-    @robot.logger.info "reply #{message} to #{envelope.user.name}"
-    if message isnt ''
-      data = envelope.user.room.split('-')
-      scope = ref_type: data[0], ref_id: data[1], at: envelope.user.id, to: envelope.user
-      @client.send scope, message
+  reply: (envelope, messages...) ->
+    sent_messages = []
+    for message in messages
+      if message isnt ''
+        data = envelope.user.room.split('-')
+        scope = ref_type: data[0], ref_id: data[1], at: envelope.user.id, to: envelope.user
+        sent_messages.push @client.send(scope, message)
+    return sent_messages
 
-  send: (envelope, message) =>
-    @robot.logger.info "send #{message} to #{envelope.user.name}"
-    if message isnt ''
-      data = envelope.user.room.split('-')
-      scope = ref_type: data[0], ref_id: data[1], at: '', to: envelope.user
-      @client.send scope, message
+  send: (envelope, message) ->
+    sent_messages = []
+    for message in messages
+      if message isnt ''
+        data = envelope.user.room.split('-')
+        scope = ref_type: data[0], ref_id: data[1], at: '', to: envelope.user
+        sent_messages.push @client.send(scope, message)
+    return sent_messages
 
 
 exports.use = (robot) ->
