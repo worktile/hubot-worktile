@@ -40,7 +40,7 @@ class WorktileBot extends Adapter
         sent_messages.push @client.send(scope, message)
     return sent_messages
 
-  send: (envelope, message) ->
+  send: (envelope, messages...) ->
     sent_messages = []
     for message in messages
       if message isnt ''
