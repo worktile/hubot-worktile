@@ -6,8 +6,8 @@ class WorktileClient
   constructor: (options, robot) ->
     @token = options.token
     @robot = robot
-    @url = "http://worktile.local:8300/hubot/#{@token}"
-    @im = "http://lesschat.win:8800/message"
+    @url = "https://hook.worktile.com/hubot/#{@token}"
+    @im = "https://im.worktile.com/message"
 
   connect: (init) ->
     @robot.http(@url).post({}) (err, res, body) =>

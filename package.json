@@ -1,6 +1,6 @@
 {
   "name": "hubot-worktile",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A Worktile adapter for hubot",
   "main": "src/worktile.coffee",
   "scripts": {
