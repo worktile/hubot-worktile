@@ -29,7 +29,7 @@ class WorktileClient
         transports: ['websocket']
       }
       socket.on 'connect', => @robot.logger.info 'Hubot connected worktile with RTM mode'
-      socket.on 'service', (data) => cb(data)
+      socket.on 'satellite', (data) => cb(data)
 
   send: (scope, text) ->
     options = method: 'POST', json: {payload: {scope: scope, text: text}}
